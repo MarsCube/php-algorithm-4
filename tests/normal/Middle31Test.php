@@ -10,8 +10,8 @@ use PHPUnit\Framework\TestCase;
 class Middle31Test extends TestCase
 {
     public function test() {
-        $result = [2,3,1];
+        $result = [1, 5, 1];
         NextPermutation::handle($result);
-        print_r($result);
+        $this->assertEquals([5, 1, 1], $result);
     }
 }

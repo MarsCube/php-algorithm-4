@@ -37,25 +37,49 @@ class NextPermutation
         $start = $index + 1;
         $end = $count - 1;
         while ($start < $end) {
-            $temp = $nums[$start];
-            $nums[$start] = $nums[$end];
-            $nums[$end] = $temp;
+            self::swap($nums[$start], $nums[$end]);
             $start++;
             $end--;
         }
         // 第三步，从「index后面」的节点中，找一个比「index位置的值」大的数里面的最小值，和index交换。
         // index为-1时，不需要交换
         if ($index != -1) {
-            $change_index = $index + 1;
-            while ($change_index < $count) {
-                if ($nums[$change_index] > $nums[$index]) {
-                    break;
-                }
-                $change_index++;
-            }
-            $temp = $nums[$change_index];
-            $nums[$change_index] = $nums[$index];
-            $nums[$index] = $temp;
+            $change_index = self::binarySearch($nums, $index + 1, $count - 1, $nums[$index]);
+            self::swap($nums[$index], $nums[$change_index]);
         }
+    }
+
+    /**
+     * 从 $arr 中找一个比 $target 大的最小值
+     *
+     * @param $arr
+     * @param $start
+     * @param $end
+     * @param $target
+     * @return int
+     */
+    private static function binarySearch(&$arr, $start, $end, $target): int
+    {
+        while ($start <= $end) {
+            $middle = intdiv($start + $end, 2);
+            if ($arr[$middle] <= $target) {
+                $start = $middle + 1;
+            } else {
+                $end = $middle - 1;
+            }
+        }
+        return $start;
+    }
+
+    /**
+     * 交换数据
+     *
+     * @param $a
+     * @param $b
+     */
+    private static function swap(&$a, &$b) {
+        $temp = $a;
+        $a = $b;
+        $b = $temp;
     }
 }
