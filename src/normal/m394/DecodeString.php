@@ -24,7 +24,6 @@ class DecodeString
     public static function handle(string $s): string
     {
         $str_len = strlen($s);
-        $result = '';
         $num_stack = [];
         $str_stack = [];
         $top_num = 0;
@@ -51,12 +50,7 @@ class DecodeString
             } else {
                 $top_str .= $s[$i];
             }
-            // 栈空的时候，要把top_str并入result，并清空 top_str
-            if (!$num_stack) {
-                $result .= $top_str;
-                $top_str = '';
-            }
         }
-        return $result;
+        return $top_str;
     }
 }
