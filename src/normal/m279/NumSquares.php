@@ -51,6 +51,7 @@ class NumSquares
         self::$square_arr = array_fill(0,$max_index + 1, 0);
         for ($i = 1; $i <= $max_index; $i++) {
             self::$square_arr[$i] = $i * $i;
+            self::$min_count_map[$i * $i] = 1;
         }
     }
 }
