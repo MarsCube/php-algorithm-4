@@ -13,25 +13,44 @@ namespace Algorithm\normal\m279;
  */
 class NumSquares
 {
+    private static $square_arr = [];
+
+    private static $min_count_map = [];
+
     /**
      * @param Integer $n
      * @return Integer
      */
     public static function handle(int $n): int
     {
-        // 动态规划
-        $max_index = (int)sqrt($n);
-        $square_arr = array_fill(0,$max_index + 1, 0);
-        for ($i = 1; $i <= $max_index; $i++) {
-            $square_arr[$i] = $i * $i;
+        self::initSquareArr($n);
+        return self::minCount($n);
+    }
+
+    /**
+     * @param $n
+     * @return int
+     */
+    private static function minCount($n): int
+    {
+        if ($n == 0) {
+            return 0;
         }
-        $dp = array_fill(0,$n + 1, PHP_INT_MAX);
-        $dp[0] = 0;
-        for ($i = 1; $i <= $n; $i++) {
-            for ($j = 1; $j <= $max_index && $square_arr[$j] <= $i; $j++) {
-                $dp[$i] = min($dp[$i], $dp[$i - $square_arr[$j]] + 1);
+        $result = PHP_INT_MAX;
+        if (!isset(self::$min_count_map[$n])) {
+            for ($i = 1; isset(self::$square_arr[$i]) && self::$square_arr[$i] <= $n; $i++) {
+                $result = min(self::minCount($n - self::$square_arr[$i]) + 1, $result);
             }
+            self::$min_count_map[$n] = $result;
         }
-        return $dp[$n];
+        return self::$min_count_map[$n];
+    }
+
+    private static function initSquareArr($n) {
+        $max_index = (int)sqrt($n);
+        self::$square_arr = array_fill(0,$max_index + 1, 0);
+        for ($i = 1; $i <= $max_index; $i++) {
+            self::$square_arr[$i] = $i * $i;
+        }
     }
 }
