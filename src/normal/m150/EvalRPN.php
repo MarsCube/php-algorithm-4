@@ -3,6 +3,8 @@
 
 namespace Algorithm\normal\m150;
 
+use SplStack;
+
 /**
  * 逆波兰表达式求值
  *
@@ -23,34 +25,28 @@ class EvalRPN
      */
     public static function handle(array $tokens): int
     {
-        $num_stack = [];
+        $num_stack = new SplStack();
         foreach ($tokens as $token) {
             switch ($token) {
                 case '+':
-                    $num1 = array_pop($num_stack);
-                    $num2 = array_pop($num_stack);
-                    array_push($num_stack, $num2 + $num1);
+                    $num_stack->push($num_stack->pop() + $num_stack->pop());
                     break;
                 case '-':
-                    $num1 = array_pop($num_stack);
-                    $num2 = array_pop($num_stack);
-                    array_push($num_stack, $num2 - $num1);
+                    $num1 = $num_stack->pop();
+                    $num_stack->push($num_stack->pop() - $num1);
                     break;
                 case '*':
-                    $num1 = array_pop($num_stack);
-                    $num2 = array_pop($num_stack);
-                    array_push($num_stack, $num2 * $num1);
+                    $num_stack->push($num_stack->pop() * $num_stack->pop());
                     break;
                 case '/':
-                    $num1 = array_pop($num_stack);
-                    $num2 = array_pop($num_stack);
-                    array_push($num_stack, intdiv($num2, $num1));
+                    $num1 = $num_stack->pop();
+                    $num_stack->push(intdiv($num_stack->pop(), $num1));
                     break;
                 default:
-                    array_push($num_stack, $token);
+                    $num_stack->push($token);
                     break;
             }
         }
-        return array_pop($num_stack);
+        return $num_stack->pop();
     }
 }
