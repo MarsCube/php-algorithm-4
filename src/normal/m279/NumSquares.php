@@ -51,7 +51,7 @@ class NumSquares
         $max_index = (int)sqrt($n);
         for ($i = $max_index; $i > 0; $i--) {
             if (self::check($n - self::$square_arr[$i], $count - 1)) {
-                self::$min_count_map[$n] = $count - 1;
+                self::$min_count_map[$n] = $count;
                 return true;
             }
         }
