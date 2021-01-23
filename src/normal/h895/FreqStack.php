@@ -3,6 +3,7 @@
 
 namespace Algorithm\normal\h895;
 
+use phpDocumentor\Reflection\Types\Integer;
 use SplStack;
 
 /**
@@ -20,7 +21,7 @@ use SplStack;
 class FreqStack
 {
     /**
-     * @var array 栈中每个元素出现的频率
+     * @var Integer[] 栈中每个元素出现的频率
      */
     private $val_freq_map;
 
@@ -44,7 +45,7 @@ class FreqStack
     }
 
     /**
-     * @param Integer $x
+     * @param int $x
      * @return void
      */
     function push(int $x)
@@ -64,7 +65,7 @@ class FreqStack
     }
 
     /**
-     * @return Integer
+     * @return int
      */
     function pop(): int
     {
