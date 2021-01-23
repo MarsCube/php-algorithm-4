@@ -3,6 +3,8 @@
 
 namespace Algorithm\normal\m279;
 
+use phpDocumentor\Reflection\Types\Integer;
+
 /**
  * 完全平方数
  *
@@ -13,42 +15,53 @@ namespace Algorithm\normal\m279;
  */
 class NumSquares
 {
+    /**
+     * @var Integer[]
+     */
     private static $square_arr = [];
 
     private static $min_count_map = [];
 
     /**
-     * @param Integer $n
-     * @return Integer
-     */
-    public static function handle(int $n): int
-    {
-        self::initSquareArr($n);
-        return self::minCount($n);
-    }
-
-    /**
-     * @param $n
+     * @param int $n
      * @return int
      */
-    private static function minCount($n): int
+    public static function handle(int $n): int
     {
         if ($n == 0) {
             return 0;
         }
-        $result = PHP_INT_MAX;
-        if (!isset(self::$min_count_map[$n])) {
-            for ($i = 1; isset(self::$square_arr[$i]) && self::$square_arr[$i] <= $n; $i++) {
-                $result = min(self::minCount($n - self::$square_arr[$i]) + 1, $result);
+        self::initSquareArr($n);
+        for ($i = 1; $i <= $n; $i++) {
+            if (self::check($n, $i)) {
+                return $i;
             }
-            self::$min_count_map[$n] = $result;
         }
-        return self::$min_count_map[$n];
+        return $n;
     }
 
-    private static function initSquareArr($n) {
+    private static function check(int $n, int $count): bool
+    {
+        if ($count == 0) {
+            return false;
+        }
+        if (isset(self::$min_count_map[$n])) {
+            return self::$min_count_map[$n] == $count;
+        }
         $max_index = (int)sqrt($n);
-        self::$square_arr = array_fill(0,$max_index + 1, 0);
+        for ($i = $max_index; $i > 0; $i--) {
+            if (self::check($n - self::$square_arr[$i], $count - 1)) {
+                self::$min_count_map[$n] = $count - 1;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static function initSquareArr($n)
+    {
+        $max_index = (int)sqrt($n);
+        self::$square_arr = array_fill(0, $max_index + 1, 0);
         for ($i = 1; $i <= $max_index; $i++) {
             self::$square_arr[$i] = $i * $i;
             self::$min_count_map[$i * $i] = 1;
