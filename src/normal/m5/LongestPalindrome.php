@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Algorithm\normal;
+namespace Algorithm\normal\m5;
 
 /**
  * 最长回文子串
