@@ -28,7 +28,7 @@ class FindDuplicate
             }
             $index = $nums[$i];
             $nums[$i] = 0;
-            while ($nums[$index - 1] != 0) {
+            while ($index != 0) {
                 if ($nums[$index - 1] == $index) {
                     return $index;
                 }
@@ -37,5 +37,6 @@ class FindDuplicate
                 $index = $temp;
             }
         }
+        return 0;
     }
 }
