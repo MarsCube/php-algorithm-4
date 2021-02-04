@@ -30,7 +30,7 @@ class FindLength
             // 重叠区域
             $overlap = min($a_len - $i, $b_len);
             if ($overlap <= $result) {
-                continue;
+                break;
             }
             $result = max($result, self::maxLength($A, $i, $B, 0, $overlap));
         }
