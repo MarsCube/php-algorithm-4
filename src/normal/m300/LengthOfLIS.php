@@ -25,7 +25,7 @@ class LengthOfLIS
      * @param Integer[] $nums
      * @return Integer
      */
-    public static function  handle(array $nums): int
+    public static function handle(array $nums): int
     {
         /**
          * 方案1：动态规划
@@ -90,6 +90,4 @@ class LengthOfLIS
         }
         return $start;
     }
-
-
 }
