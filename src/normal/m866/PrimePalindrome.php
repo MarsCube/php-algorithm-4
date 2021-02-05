@@ -36,9 +36,6 @@ class PrimePalindrome
         if ($n == 1) {
             return false;
         }
-        if ($n == 2 || $n == 3) {
-            return true;
-        }
         $max = sqrt($n);
         for ($i = 2; $i <= $max; $i++) {
             if ($n % $i == 0) {
@@ -62,7 +59,6 @@ class PrimePalindrome
         if ((int)$result >= $n) {
             return (int)$result;
         }
-
         $mid = ceil(strlen($n) / 2);
         $num = (int)substr($result, 0, $mid) + 1;
         $num = (string)$num;
@@ -71,7 +67,6 @@ class PrimePalindrome
         }
         return (int)self::reserveAfter($result);
     }
-
 
     private static function reserveAfter(string $n): string
     {
