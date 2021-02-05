@@ -31,6 +31,12 @@ class PrimePalindrome
         return $n;
     }
 
+    /**
+     * 判断素数
+     *
+     * @param int $n
+     * @return bool
+     */
     private static function isPrime(int $n): bool
     {
         if ($n == 1) {
@@ -68,6 +74,12 @@ class PrimePalindrome
         return (int)self::reserveAfter($result);
     }
 
+    /**
+     * 翻转出回文
+     *
+     * @param string $n
+     * @return string
+     */
     private static function reserveAfter(string $n): string
     {
         $length = strlen($n);
