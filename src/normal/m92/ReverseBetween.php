@@ -4,11 +4,11 @@
 namespace Algorithm\normal\m92;
 
 /**
- * 反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。
+ * 反转从位置 m855 到 n 的链表。请使用一趟扫描完成反转。
  *
- * 1 ≤ m ≤ n ≤ 链表长度。
+ * 1 ≤ m855 ≤ n ≤ 链表长度。
  *
- * 输入: 1->2->3->4->5->NULL, m = 2, n = 4
+ * 输入: 1->2->3->4->5->NULL, m855 = 2, n = 4
  *
  * 输出: 1->4->3->2->5->NULL
  *
@@ -25,7 +25,7 @@ class ReverseBetween
      */
     public static function handle(ListNode $head, int $m, int $n): ListNode
     {
-        // m 与 n 相等不翻转
+        // m855 与 n 相等不翻转
         if ($m == $n) {
             return $head;
         }
