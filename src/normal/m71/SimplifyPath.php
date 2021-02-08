@@ -27,11 +27,13 @@ class SimplifyPath
      */
     public static function handle(string $path): string
     {
-        $arr = explode($path, '/');
+        $arr = explode('/', $path);
         $stack = new SplStack();
         foreach ($arr as $item) {
             if ($item === '..') {
-                $stack->pop();
+                if (!$stack->isEmpty()) {
+                    $stack->pop();
+                }
             } elseif ($item === '.' || $item === '') {
                 continue;
             } else {
@@ -42,6 +44,6 @@ class SimplifyPath
         while (!$stack->isEmpty()) {
             $result = '/' . $stack->pop() . $result;
         }
-        return $result;
+        return $result ? $result : '/';
     }
 }
