@@ -29,15 +29,15 @@ class IntToRoman
      */
     public static function handle(int $num): string
     {
-        $num1 = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
-        $num2 = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"];
-        $num3 = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"];
-        $num4 = ["", "M", "MM", "MMM"];
+        $num_array = [["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"],
+            ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"],
+            ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"],
+            ["", "M", "MM", "MMM"]
+        ];
         $result = '';
         $base = 1000;
-        for ($i = 4; $i >= 1; $i--) {
-            $array = 'num' . $i;
-            $result .= ($$array)[intdiv($num, $base)];
+        for ($i = 3; $i >= 0; $i--) {
+            $result .= $num_array[$i][intdiv($num, $base)];
             $num = $num % $base;
             $base = $base / 10;
         }
