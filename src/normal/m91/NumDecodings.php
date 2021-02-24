@@ -28,6 +28,8 @@ class NumDecodings
 {
     private static $map;
 
+    private static $s;
+
     /**
      * @param String $s
      * @return Integer
@@ -35,28 +37,27 @@ class NumDecodings
     public static function handle(string $s): int
     {
         self::$map = [];
-        return self::helper($s, 0, strlen($s) - 1);
+        self::$s = $s;
+        return self::helper(0);
     }
 
     /**
-     * @param String $s
      * @param Integer $start
-     * @param Integer $end
      * @return int
      */
-    private static function helper(string &$s, int $start, int $end): int
+    private static function helper(int $start): int
     {
-        if ($s[$start] == '0') {
+        if ($start < strlen(self::$s) && self::$s[$start] == '0') {
             return 0;
         }
-        if ($start >= $end) {
+        if ($start >= strlen(self::$s) - 1) {
             return 1;
         }
         if (!isset(self::$map[$start])) {
-            if (substr($s, $start, 2) > 26) {
-                self::$map[$start] = self::helper($s, $start + 1, $end);
+            if (substr(self::$s, $start, 2) > 26) {
+                self::$map[$start] = self::helper($start + 1);
             } else {
-                self::$map[$start] = self::helper($s, $start + 1, $end) + self::helper($s, $start + 2, $end);
+                self::$map[$start] = self::helper($start + 1) + self::helper($start + 2);
             }
         }
         return self::$map[$start];
