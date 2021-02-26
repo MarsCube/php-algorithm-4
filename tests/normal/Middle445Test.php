@@ -10,7 +10,8 @@ use PHPUnit\Framework\TestCase;
 
 class Middle445Test extends TestCase
 {
-    public function test() {
+    public function test()
+    {
         $node1 = new ListNode(7);
         $node2 = new ListNode(2);
         $node3 = new ListNode(4);
